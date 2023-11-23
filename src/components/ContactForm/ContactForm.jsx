@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import { Form, Input, Button, Label } from '../ContactForm/ContactForm.styled';
 
@@ -6,8 +7,8 @@ const nameId = nanoid();
 const numberId = nanoid();
 
 const ContactForm = ({ sumbit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  //   const [name, setName] = useState('');
+  //   const [number, setNumber] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,17 +22,17 @@ const ContactForm = ({ sumbit }) => {
   };
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
+    //  const { name, value } = e.target;
+    //  switch (name) {
+    //    case 'name':
+    //      setName(value);
+    //      break;
+    //    case 'number':
+    //      setNumber(value);
+    //      break;
+    //    default:
+    //      break;
+    //  }
   };
 
   return (
