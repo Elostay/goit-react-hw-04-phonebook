@@ -22,7 +22,6 @@ const ContactForm = ({ sumbit }) => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-
     switch (name) {
       case 'name':
         setName(value);
