@@ -12,13 +12,16 @@ const App = () => {
 
   useEffect(() => {
     const savedContacts = JSON.parse(localStorage.getItem(LS_KEY));
+
     if (savedContacts) {
       setContacts(savedContacts);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify(contacts));
+    if (contacts.length !== 0) {
+      localStorage.setItem(LS_KEY, JSON.stringify(contacts));
+    }
   }, [contacts]);
 
   const handleSubmit = ({ name, number }) => {
@@ -28,11 +31,7 @@ const App = () => {
       alert(`${name} is already in contacts`);
       return;
     }
-    setContacts(prev => {
-      return {
-        contacts: [...prev, { name, number, id: nanoid() }],
-      };
-    });
+    setContacts(prev => [...prev, { name, number, id: nanoid() }]);
   };
 
   const changeFilter = e => {
@@ -53,8 +52,6 @@ const App = () => {
     return visibleContacts;
   };
 
-  const visibleContacts = getFilteredContacts();
-
   return (
     <Container>
       <Title>Phonebook</Title>
@@ -63,7 +60,7 @@ const App = () => {
       <Filter value={filter} changeFilter={changeFilter} />
       <ContactList
         contacts={contacts}
-        visibleContacts={visibleContacts}
+        visibleContacts={getFilteredContacts()}
         onDeleteContact={deleteContact}
       />
     </Container>
