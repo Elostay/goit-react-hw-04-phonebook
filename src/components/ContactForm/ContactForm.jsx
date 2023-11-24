@@ -1,5 +1,4 @@
-// import React, { useState } from 'react';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Form, Input, Button, Label } from '../ContactForm/ContactForm.styled';
 
@@ -7,40 +6,44 @@ const nameId = nanoid();
 const numberId = nanoid();
 
 const ContactForm = ({ sumbit }) => {
-  //   const [name, setName] = useState('');
-  //   const [number, setNumber] = useState('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const formRef = useRef(null);
 
   const handleSubmit = e => {
     e.preventDefault();
+
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
 
     sumbit({ name, number });
 
-    form.reset();
+    setName('');
+    setNumber('');
   };
 
   const handleChange = e => {
-    //  const { name, value } = e.target;
-    //  switch (name) {
-    //    case 'name':
-    //      setName(value);
-    //      break;
-    //    case 'number':
-    //      setNumber(value);
-    //      break;
-    //    default:
-    //      break;
-    //  }
+    const { name, value } = e.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} ref={formRef}>
       <Label htmlFor={nameId}>Name</Label>
       <Input
         type="text"
         name="name"
+        value={name}
         id={nameId}
         onChange={handleChange}
         required
@@ -50,6 +53,7 @@ const ContactForm = ({ sumbit }) => {
       <Input
         type="tel"
         name="number"
+        value={number}
         id={numberId}
         onChange={handleChange}
         required
