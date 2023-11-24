@@ -12,13 +12,7 @@ const ContactForm = ({ sumbit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-
     sumbit({ name, number });
-
     setName('');
     setNumber('');
   };
